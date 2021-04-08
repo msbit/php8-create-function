@@ -18,11 +18,11 @@ function __lambda_func($args){$code}
 ```
 
 * evaluate this to create a `__lambda_func` function
-* rename the `__lambda_func` function to `\0lambda_X` where `X` is an incrementing counter in the PHP environment, ensuring the resulting function name is unique 
+* rename the `__lambda_func` function to `\0lambda_n` where `n` is an incrementing counter in the PHP environment, ensuring the resulting function name is unique
 
 We are unable to replicate this exactly from pure PHP as:
 
-* calling [`eval`](https://www.php.net/manual/en/function.eval.php) with a created function name matching the inbuilt format (`\0lambda_x`) fails due to an `Unexpected character in input`, and
+* calling [`eval`](https://www.php.net/manual/en/function.eval.php) with a created function name matching the inbuilt format (`\0lambda_n`) fails due to an `Unexpected character in input`, and
 * there is no sensible way to determine the existing value of the counter
 
 Thus, to ensure a similar level of uniqueness between functions, this implementation uses a hash of the provided arguments, together with a salt that is constant for a given script execution, to generate a name for the function. Additionally, as the hash is a direct representation of the content of the function, this can be used to avoid creating multiple identical functions.
