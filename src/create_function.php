@@ -2,7 +2,7 @@
 
 namespace Msbit;
 
-function create_function($args, $code) {
+function create_function(string $args, string $code): string {
   static $salt = null;
   $salt ??= bin2hex(random_bytes(64));
 
